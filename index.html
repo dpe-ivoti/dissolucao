@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulário - Dissolução de União Estável</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #e8f5e8 0%, #f0f8f0 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #2d5a27 0%, #4a7c59 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            opacity: 0.9;
+            font-size: 16px;
+        }
+
+        .form-container {
+            padding: 40px;
+        }
+
+        .section {
+            margin-bottom: 40px;
+        }
+
+        .section-title {
+            background: linear-gradient(135deg, #6a994e 0%, #7fb069 100%);
+            color: white;
+            padding: 15px 20px;
+            border-radius: 8px;
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 15px rgba(106, 153, 78, 0.3);
+        }
+
+        .doc-list {
+            display: grid;
+            gap: 12px;
+        }
+
+        .doc-item {
+            display: flex;
+            align-items: flex-start;
+            padding: 15px;
+            background: #f8fcf8;
+            border-left: 4px solid #7fb069;
+            border-radius: 8px;
+            line-height: 1.5;
+        }
+
+        .doc-number {
+            font-weight: 600;
+            color: #6a994e;
+            margin-right: 10px;
+            min-width: 30px;
+        }
+
+        .doc-text {
+            color: #2d4a27;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #2d4a27;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e1f0e1;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: border-color 0.3s ease;
+            background: white;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #7fb069;
+            box-shadow: 0 0 0 3px rgba(127, 176, 105, 0.1);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .required {
+            color: #c44536;
+        }
+
+        .submit-section {
+            background: #f8fcf8;
+            padding: 30px;
+            border-radius: 10px;
+            text-align: center;
+            margin-top: 40px;
+        }
+
+        .btn-submit {
+            background: linear-gradient(135deg, #6a994e 0%, #7fb069 100%);
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            font-size: 18px;
+            font-weight: 600;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(106, 153, 78, 0.3);
+        }
+
+        .btn-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(106, 153, 78, 0.4);
+        }
+
+        .btn-submit:active {
+            transform: translateY(0);
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .btn-copy, .btn-whatsapp {
+            background: linear-gradient(135deg, #6a994e 0%, #7fb069 100%);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            font-size: 16px;
+            font-weight: 600;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(106, 153, 78, 0.3);
+        }
+
+        .btn-whatsapp {
+            background: linear-gradient(135deg, #25d366 0%, #128c7e 100%);
+        }
+
+        .btn-copy:hover, .btn-whatsapp:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(106, 153, 78, 0.4);
+        }
+
+        .output-section {
+            display: none;
+            background: #f0f8f0;
+            border: 2px solid #7fb069;
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 20px;
+        }
+
+        .output-section h3 {
+            color: #2d4a27;
+            margin-bottom: 15px;
+        }
+
+        .output-content {
+            background: white;
+            padding: 15px;
+            border-radius: 5px;
+            white-space: pre-line;
+            font-family: monospace;
+            font-size: 14px;
+            border: 1px solid #d4e6d4;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+
+        @media (max-width: 768px) {
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+            
+            .form-container {
+                padding: 20px;
+            }
+            
+            .header {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Dissolução de União Estável Litigiosa</h1>
+            <p>Formulário para regulamentação de guarda, visitas, alimentos e partilha de bens</p>
+        </div>
+
+        <div class="form-container">
+            <form id="dissolucaoForm">
+                <!-- Seção de Documentos -->
+                <div class="section">
+                    <div class="section-title">📋 Documentos Necessários (deverão ser apresentados no dia do atendimento)</div>
+                    <div class="doc-list">
+                        <div class="doc-item">
+                            <span class="doc-number">01)</span>
+                            <span class="doc-text">Documentos pessoais (RG e CPF) da parte requerente</span>
+                        </div>
+                        <div class="doc-item">
+                            <span class="doc-number">02)</span>
+                            <span class="doc-text">Comprovante de residência (conta de água/luz/telefone)</span>
+                        </div>
+                        <div class="doc-item">
+                            <span class="doc-number">03)</span>
+                            <span class="doc-text">Comprovante de renda de quem reside na casa (carteira de trabalho, contracheque, benefício previdenciário, declaração IRPF)</span>
+                        </div>
+                        <div class="doc-item">
+                            <span class="doc-number">04)</span>
+                            <span class="doc-text">Escritura Pública Declaratória de União Estável (se houver)</span>
+                        </div>
+                        <div class="doc-item">
+                            <span class="doc-number">05)</span>
+                            <span class="doc-text">Certidão de nascimento dos filhos menores</span>
+                        </div>
+                        <div class="doc-item">
+                            <span class="doc-number">06)</span>
+                            <span class="doc-text">Endereço residencial e comercial da parte ré</span>
+                        </div>
+                        <div class="doc-item">
+                            <span class="doc-number">07)</span>
+                            <span class="doc-text">Cartão bancário para depósito de pensão alimentícia (banco, agência e conta)</span>
+                        </div>
+                        <div class="doc-item">
+                            <span class="doc-number">08)</span>
+                            <span class="doc-text">Comprovantes das despesas dos filhos menores</span>
+                        </div>
+                        <div class="doc-item">
+                            <span class="doc-number">09)</span>
+                            <span class="doc-text">Comprovantes dos rendimentos da parte ré (se houver)</span>
+                        </div>
+                        <div class="doc-item">
+                            <span class="doc-number">10)</span>
+                            <span class="doc-text">Lista de bens para partilhar (imóveis com matrícula, veículos com prontuário DETRAN, bens móveis descritos)</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Seção de Dados Pessoais -->
+                <div class="section">
+                    <div class="section-title">👤 Dados Pessoais do Requerente</div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="nomeCompleto">Nome completo <span class="required">*</span></label>
+                            <input type="text" id="nomeCompleto" name="nomeCompleto" required placeholder="Digite seu nome completo">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="cpf">CPF <span class="required">*</span></label>
+                            <input type="text" id="cpf" name="cpf" required placeholder="000.000.000-00" maxlength="14">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Seção de Questionário -->
+                <div class="section">
+                    <div class="section-title">📝 Informações sobre a União e Separação</div>
+                    
+                    <div class="form-group">
+                        <label for="tempoConvivencia">A) Por quanto tempo conviveu a parte requerente com a parte ré? <span class="required">*</span></label>
+                        <input type="text" id="tempoConvivencia" name="tempoConvivencia" required placeholder="Ex: 5 anos, 2 anos e 6 meses">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="tempoSeparacao">B) Há quanto tempo estão separados? <span class="required">*</span></label>
+                        <input type="text" id="tempoSeparacao" name="tempoSeparacao" required placeholder="Ex: 1 ano, 6 meses">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="guardaFilhos">C) Desde a separação, quem está exercendo os cuidados dos filhos menores? <span class="required">*</span></label>
+                        <input type="text" id="guardaFilhos" name="guardaFilhos" required placeholder="Nome do responsável pelos cuidados dos filhos">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="alteracaoGuarda">D) Se não estiver exercendo a guarda de fato e desejar assumir os cuidados dos filhos, esclareça por que pretende a alteração da guarda. Há risco aos filhos na forma como se encontram?</label>
+                        <textarea id="alteracaoGuarda" name="alteracaoGuarda" placeholder="Descreva os motivos para alteração da guarda e eventuais riscos"></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="visitaRegulamentacao">E) Como deseja regulamentar o direito de visitas? Com que frequência será realizada? <span class="required">*</span></label>
+                        <textarea id="visitaRegulamentacao" name="visitaRegulamentacao" required placeholder="Ex: Finais de semana alternados, quartas-feiras das 14h às 18h, etc."></textarea>
+                    </div>
+                </div>
+
+                <!-- Seção sobre Alimentos -->
+                <div class="section">
+                    <div class="section-title">💰 Informações sobre Pensão Alimentícia</div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="ajudaAtual">F) A parte ré, desde a separação, vem ajudando com algum valor de alimentos? Quanto? <span class="required">*</span></label>
+                            <input type="text" id="ajudaAtual" name="ajudaAtual" required placeholder="Ex: R$ 500,00 mensais, Não ajuda">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="rendaReu">G) Quanto a parte ré ganha por mês? Qual sua atividade profissional? <span class="required">*</span></label>
+                            <input type="text" id="rendaReu" name="rendaReu" required placeholder="Ex: R$ 2.500,00 - Vendedor">
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="outrosFilhos">H) A parte ré possui outros filhos menores? <span class="required">*</span></label>
+                            <select id="outrosFilhos" name="outrosFilhos" required>
+                                <option value="">Selecione</option>
+                                <option value="não">Não</option>
+                                <option value="sim">Sim</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="valorDesejado">I) Que valor deseja receber a título de pensão alimentícia? <span class="required">*</span></label>
+                            <input type="text" id="valorDesejado" name="valorDesejado" required placeholder="Ex: R$ 800,00, 30% do salário">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="carteiraAssinada">J) A parte ré possui carteira assinada? Qual empregador? Deseja fazer desconto em folha?</label>
+                        <textarea id="carteiraAssinada" name="carteiraAssinada" placeholder="Informe se tem carteira assinada, nome do empregador e se deseja desconto em folha. Se sim, informe conta bancária."></textarea>
+                    </div>
+                </div>
+
+                <!-- Seção sobre Partilha -->
+                <div class="section">
+                    <div class="section-title">🏠 Partilha de Bens</div>
+                    
+                    <div class="form-group">
+                        <label for="partilhaBens">K) Como deseja partilhar os bens? <span class="required">*</span></label>
+                        <textarea id="partilhaBens" name="partilhaBens" required placeholder="Descreva como deseja dividir os bens (imóveis, veículos, móveis, etc.)"></textarea>
+                    </div>
+                </div>
+
+                <div class="submit-section">
+                    <button type="submit" class="btn-submit">📝 Gerar Formulário</button>
+                    <div id="outputSection" class="output-section">
+                        <h3>Formulário Preenchido - Copie e Envie:</h3>
+                        <div id="outputContent" class="output-content"></div>
+                        <div class="action-buttons">
+                            <button type="button" id="copyBtn" class="btn-copy">📋 Copiar Texto</button>
+                            <button type="button" id="whatsappBtn" class="btn-whatsapp">📱 Enviar via WhatsApp</button>
+                            <button type="button" id="generatePdfBtn" class="btn-pdf">📄 Gerar PDF</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('dissolucaoForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const formData = new FormData(this);
+            let output = 'FORMULÁRIO - DISSOLUÇÃO DE UNIÃO ESTÁVEL LITIGIOSA\n';
+            output += '='.repeat(60) + '\n\n';
+            
+            // Dados Pessoais
+            output += '👤 DADOS PESSOAIS DO REQUERENTE:\n';
+            const nomeCompleto = formData.get('nomeCompleto');
+            const cpf = formData.get('cpf');
+            if (nomeCompleto) output += `Nome: ${nomeCompleto}\n`;
+            if (cpf) output += `CPF: ${cpf}\n`;
+            output += '📝 RESPOSTAS DO QUESTIONÁRIO:\n';
+            output += `-${''.repeat(40)}\n`;
+            
+            // Documentos (apenas lista informativa)
+            output += '📋 DOCUMENTOS NECESSÁRIOS PARA ATENDIMENTO:\n';
+            output += '01) Documentos pessoais (RG e CPF) da parte requerente\n';
+            output += '02) Comprovante de residência (conta de água/luz/telefone)\n';
+            output += '03) Comprovante de renda de quem reside na casa\n';
+            output += '04) Escritura Pública Declaratória de União Estável (se houver)\n';
+            output += '05) Certidão de nascimento dos filhos menores\n';
+            output += '06) Endereço residencial e comercial da parte ré\n';
+            output += '07) Cartão bancário para depósito de pensão alimentícia\n';
+            output += '08) Comprovantes das despesas dos filhos menores\n';
+            output += '09) Comprovantes dos rendimentos da parte ré\n';
+            output += '10) Lista de bens para partilhar\n';
+            output += '\n';
+            
+            // Questionário
+            const questions = [
+                { key: 'tempoConvivencia', label: 'A) Tempo de convivência' },
+                { key: 'tempoSeparacao', label: 'B) Tempo de separação' },
+                { key: 'guardaFilhos', label: 'C) Quem cuida dos filhos' },
+                { key: 'alteracaoGuarda', label: 'D) Alteração de guarda' },
+                { key: 'visitaRegulamentacao', label: 'E) Regulamentação de visitas' },
+                { key: 'ajudaAtual', label: 'F) Ajuda atual com alimentos' },
+                { key: 'rendaReu', label: 'G) Renda da parte ré' },
+                { key: 'outrosFilhos', label: 'H) Outros filhos menores' },
+                { key: 'valorDesejado', label: 'I) Valor desejado de pensão' },
+                { key: 'carteiraAssinada', label: 'J) Carteira assinada/empregador' },
+                { key: 'partilhaBens', label: 'K) Partilha de bens' }
+            ];
+            
+            questions.forEach(q => {
+                const value = formData.get(q.key);
+                if (value && value.trim()) {
+                    output += `${q.label}: ${value}\n\n`;
+                }
+            });
+            
+            output += '='.repeat(60) + '\n';
+            output += `Data do preenchimento: ${new Date().toLocaleDateString('pt-BR')}\n`;
+            
+            document.getElementById('outputContent').textContent = output;
+            document.getElementById('outputSection').style.display = 'block';
+            
+            // Scroll para a seção de output
+            document.getElementById('outputSection').scrollIntoView({ 
+                behavior: 'smooth' 
+            });
+        });
+
+        // Função para copiar texto
+        document.getElementById('copyBtn').addEventListener('click', function() {
+            const content = document.getElementById('outputContent').textContent;
+            navigator.clipboard.writeText(content).then(function() {
+                const btn = document.getElementById('copyBtn');
+                const originalText = btn.textContent;
+                btn.textContent = '✅ Copiado!';
+                btn.style.background = 'linear-gradient(135deg, #28a745 0%, #20c997 100%)';
+                setTimeout(() => {
+                    btn.textContent = originalText;
+                    btn.style.background = 'linear-gradient(135deg, #6a994e 0%, #7fb069 100%)';
+                }, 2000);
+            });
+        });
+
+        // Função para enviar via WhatsApp
+        document.getElementById('whatsappBtn').addEventListener('click', function() {
+            const content = document.getElementById('outputContent').textContent;
+            
+            // Criar mensagem formatada para WhatsApp
+            let message = encodeURIComponent(content);
+            
+            // Detectar se é mobile ou desktop
+            const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+            
+            let whatsappUrl;
+            
+            if (isMobile) {
+                // Para dispositivos móveis - abre o app diretamente
+                whatsappUrl = `whatsapp://send?text=${message}`;
+            } else {
+                // Para desktop - abre WhatsApp Web
+                whatsappUrl = `https://web.whatsapp.com/send?text=${message}`;
+            }
+            
+            // Tentar abrir o WhatsApp
+            const link = document.createElement('a');
+            link.href = whatsappUrl;
+            link.target = '_blank';
+            link.rel = 'noopener noreferrer';
+            
+            // Adicionar ao DOM temporariamente e clicar
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            
+            // Fallback: se não funcionar, tentar a URL universal
+            setTimeout(() => {
+                if (!document.hidden) {
+                    const fallbackUrl = `https://wa.me/?text=${message}`;
+                    window.open(fallbackUrl, '_blank', 'noopener,noreferrer');
+                }
+            }, 1000);
+        });
+
+        // Função para gerar PDF
+        document.getElementById('generatePdfBtn').addEventListener('click', function() {
+            const content = document.getElementById('outputContent').textContent;
+            
+            // Criar um elemento temporário para o PDF
+            const pdfContent = document.createElement('div');
+            pdfContent.style.cssText = `
+                font-family: Arial, sans-serif;
+                font-size: 12px;
+                line-height: 1.4;
+                white-space: pre-line;
+                padding: 40px;
+                background: white;
+                max-width: 210mm;
+                margin: 0 auto;
+            `;
+            pdfContent.textContent = content;
+            
+            // Adicionar ao body temporariamente
+            document.body.appendChild(pdfContent);
+            
+            // Configurar impressão
+            const originalContents = document.body.innerHTML;
+            document.body.innerHTML = pdfContent.outerHTML;
+            
+            // Imprimir (que abrirá dialog para salvar como PDF)
+            window.print();
+            
+            // Restaurar conteúdo original
+            document.body.innerHTML = originalContents;
+            
+            // Re-anexar event listeners
+            location.reload();
+        });
+
+        // Máscara para CPF
+        document.getElementById('cpf').addEventListener('input', function(e) {
+            let value = e.target.value.replace(/\D/g, '');
+            value = value.replace(/(\d{3})(\d)/, '$1.$2');
+            value = value.replace(/(\d{3})(\d)/, '$1.$2');
+            value = value.replace(/(\d{3})(\d{1,2})$/, '$1-$2');
+            e.target.value = value;
+        });
+    </script>
+</body>
+</html>
